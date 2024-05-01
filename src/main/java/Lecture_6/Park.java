@@ -10,7 +10,7 @@ public class Park {
         this.parkName = parkName;
     }
 
-    public String getParkName(){
+    public String getParkName() {
         return parkName;
     }
 

@@ -18,7 +18,7 @@ public class Lecture_6 {
                 "vt.senkevich@mail.com", "+375(29)641-66-78", new BigDecimal("900.00"), 21);
 
         //Вывод информации о конкретном сотруднике
-        //employees[1].displayAllInformationAboutEmployee();
+        employees[1].displayAllInformationAboutEmployee();
 
         //Вывод информации о всех сотрудниках
         //Employee.displayInformationAboutAllEmployees(employees);

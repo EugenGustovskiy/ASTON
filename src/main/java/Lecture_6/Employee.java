@@ -3,12 +3,12 @@ package Lecture_6;
 import java.math.BigDecimal;
 
 public class Employee {
-    String fullName;
-    String jobTitle;
-    String email;
-    String phoneNumber;
-    BigDecimal salary;
-    int age;
+    private String fullName;
+    private String jobTitle;
+    private String email;
+    private String phoneNumber;
+    private BigDecimal salary;
+    private int age;
 
     public Employee(String fullName, String jobTitle, String email, String phoneNumber,
                     BigDecimal salary, int age) {
