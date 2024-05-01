@@ -96,9 +96,7 @@ public class Homework {
 
     //9
     public static boolean checkYearIsLeap(int year) {
-        if (year % 100 == 0) {
-            return year % 400 == 0;
-        } else return year % 4 == 0;
+        return year % 100 == 0 ? year % 400 == 0 : year % 4 == 0;
     }
 
     //10
