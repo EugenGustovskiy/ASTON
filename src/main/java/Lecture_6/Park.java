@@ -29,19 +29,19 @@ public class Park {
     }
 
     public class Attraction {
-        private String attractionName;
+        private String name;
         private String workingHours;
         private BigDecimal cost;
 
         public Attraction(String name, String workingHours, BigDecimal cost) {
-            this.attractionName = name;
+            this.name = name;
             this.workingHours = workingHours;
             this.cost = cost;
         }
 
         public void displayAllInformationAboutAttraction() {
             System.out.printf("Название аттракциона: %s\nВремя работы: %s\nСтоимость: %s\n",
-                    attractionName, workingHours, cost.toString());
+                    name, workingHours, cost.toString());
         }
     }
 }
