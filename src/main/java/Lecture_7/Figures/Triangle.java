@@ -27,7 +27,7 @@ public class Triangle implements CalculationPerimeterAndArea {
         return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
     }
 
-    public void printTriangleInfo() {
+    public void getTriangleInfo() {
         System.out.printf("Triangle\nPerimeter: %.2f\nArea: %.2f\nFill color: %s\nBorder color: %s\n* * *\n",
                 calculatePerimeter(), calculateArea(), fillColor, borderColor);
     }

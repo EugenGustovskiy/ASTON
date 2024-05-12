@@ -21,7 +21,7 @@ public class Circle implements CalculationPerimeterAndArea {
         return Math.PI * radius * radius;
     }
 
-    public void printCircleInfo() {
+    public void getCircleInfo() {
         System.out.printf("Circle\nPerimeter: %.2f\nArea: %.2f\nFill color: %s\nBorder color: %s\n* * *\n",
                 calculatePerimeter(), calculateArea(), fillColor, borderColor);
     }

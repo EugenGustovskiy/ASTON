@@ -23,7 +23,7 @@ public class Rectangle implements CalculationPerimeterAndArea {
         return width * height;
     }
 
-    public void printRectangleInfo() {
+    public void getRectangleInfo() {
         System.out.printf("Rectangle\nPerimeter: %.2f\nArea: %.2f\nFill color: %s\nBorder color: %s\n* * *\n",
                 calculatePerimeter(), calculateArea(), fillColor, borderColor);
     }

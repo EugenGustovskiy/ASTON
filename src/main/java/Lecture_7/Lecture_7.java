@@ -22,23 +22,23 @@ public class Lecture_7 {
         dogs[4] = new Dog("Агбар");
 
         //Сколько пробежали
-        //cats[1].displayHowManyRun(200);
-        //dogs[1].displayHowManyRun(540);
+        //cats[1].run(210);
+        //dogs[1].run(540);
 
         //Сколько проплыли
-        //cats[2].displayHowManySwim(20);
-        //dogs[2].displayHowManySwim(10);
+        //cats[2].swim(20);
+        //dogs[2].swim(10);
 
         //Сколько котов
-        //int countCats = Animal.returnCountCertainAnimals(cats);
+        //int countCats = Animal.getCountCertainAnimals(cats);
         //System.out.println("Всего котов: " + countCats);
 
         //Сколько собак
-        //int countDogs = Animal.returnCountCertainAnimals(dogs);
+        //int countDogs = Animal.getCountCertainAnimals(dogs);
         //System.out.println("Всего собак: " + countDogs);
 
         //Сколько общее количество животных
-        //int allCountAnimals = Animal.returnCountAllAnimals(countCats, countDogs);
+        //int allCountAnimals = Animal.getCountAllAnimals(countCats, countDogs);
         //System.out.println("Всего животных: " + allCountAnimals);
 
         //Процесс по кормлению котов и выводу в консоль их сытости + процесс пополнения миски
@@ -50,17 +50,17 @@ public class Lecture_7 {
         //Cat.findOutIsCatFull(cats);
 
         //Задание 2
-        Circle circle1 = new Circle(2.0, "Зеленый", "Черный");
-        Rectangle rectangle1 = new Rectangle(1.0, 2.0, "Оранжевый", "Синий");
-        Triangle triangle1 = new Triangle(2.0, 2.0, 3.0, "Красный", "Белый");
+        //Circle circle1 = new Circle(2.0, "Зеленый", "Черный");
+        //Rectangle rectangle1 = new Rectangle(1.0, 2.0, "Оранжевый", "Синий");
+        //Triangle triangle1 = new Triangle(2.0, 2.0, 3.0, "Красный", "Белый");
 
-        circle1.printCircleInfo();
-        rectangle1.printRectangleInfo();
-        triangle1.printTriangleInfo();
+        //circle1.getCircleInfo();
+        //rectangle1.getRectangleInfo();
+        //triangle1.getTriangleInfo();
     }
     //Задание 1
     //Пополняем миску с едой
-    public static int replenishFoodBowl(int bowlOfFood, int amountOfFood) {
+    public int replenishFoodBowl(int bowlOfFood, int amountOfFood) {
         return bowlOfFood + amountOfFood;
     }
 }
