@@ -12,10 +12,11 @@ public class Lecture_8 {
         //String[][] wrongArray = {{"1", "2", "D", "4"}, {"5", "6", "7", "8"}, {"9", "10", "11", "12"},
         //        {"13", "14", "15", "16"}};
 
-        checkArray(array);
+        Lecture_8 lecture = new Lecture_8();
+        lecture.checkArray(array);
     }
 
-    public static void checkArray(String[][] array) {
+    public void checkArray(String[][] array) {
         try {
             checkArraySize(array);
             int result = getArraySum(array);
@@ -28,14 +29,14 @@ public class Lecture_8 {
     }
 
     //Проверка размера массива
-    public static void checkArraySize(String[][] array) throws MyArraySizeException {
+    public void checkArraySize(String[][] array) throws MyArraySizeException {
         if (array.length != 4 || array[0].length != 4) {
             throw new MyArraySizeException();
         }
     }
 
     //Преобразуем элементы массива в int и находим сумму всех элементов
-    public static int getArraySum(String[][] array) throws MyArrayDataException {
+    public int getArraySum(String[][] array) throws MyArrayDataException {
         int sum = 0;
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
