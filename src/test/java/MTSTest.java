@@ -42,7 +42,7 @@ public class MTSTest {
     @Test
     public void testPaymentSystemLogos() {
         List<WebElement> logos = driver.findElements(By.xpath("//div[@class = 'pay__partners']//ul//li"));
-        assertTrue(logos.size() == 5, "Логотипы платёжных систем отсутствуют.");
+        assertEquals(5, logos.size(), "Логотипы платёжных систем отсутствуют.");
     }
 
     @DisplayName("Проверить работу ссылки 'Подробнее о сервисе'")
