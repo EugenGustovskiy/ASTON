@@ -1,7 +1,4 @@
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,13 +16,13 @@ public class MTSTest {
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    @BeforeAll
-    public static void setUp() {
-        // Укажите путь к вашему драйверу Chrome
+    @BeforeEach
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "D:\\Новая папка\\ASTON\\src\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         driver.get("https://www.mts.by/");
         handleCookiesPopup();
     }
@@ -66,6 +63,16 @@ public class MTSTest {
         sumInput.sendKeys("10");
         emailInput.sendKeys("test@example.com");
         submitButton.click();
+
+        // Используем явное ожидание для поиска iframe
+        WebElement iframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.bepaid-app iframe")));
+        driver.switchTo().frame(iframe);
+
+        // Используем явное ожидание для поиска элемента в iframe
+        WebElement popupElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[text()='10.00 BYN']")));
+
+        assertTrue(popupElement.isDisplayed(), "Всплывающее окно не отобразилось");
     }
 
     private static void handleCookiesPopup() {
@@ -77,8 +84,8 @@ public class MTSTest {
         }
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
