@@ -68,9 +68,10 @@ public class MTSTest {
         WebElement iframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.bepaid-app iframe")));
         driver.switchTo().frame(iframe);
 
-        // Используем явное ожидание для поиска элемента в iframe
         WebElement popupElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//span[text()='10.00 BYN']")));
+
+
 
         assertTrue(popupElement.isDisplayed(), "Всплывающее окно не отобразилось");
     }
