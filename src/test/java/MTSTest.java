@@ -76,7 +76,7 @@ public class MTSTest {
         assertTrue(popupElement.isDisplayed(), "Всплывающее окно не отобразилось");
     }
 
-    private static void handleCookiesPopup() {
+    private void handleCookiesPopup() {
         try {
             WebElement acceptCookiesButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cookie-agree")));
             acceptCookiesButton.click();
@@ -85,10 +85,10 @@ public class MTSTest {
         }
     }
 
-    @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+    //@AfterEach
+    //public void tearDown() {
+    //    if (driver != null) {
+    //        driver.quit();
+    //    }
+    //}
 }
