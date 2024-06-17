@@ -1,14 +1,13 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,9 +23,7 @@ public class NewMTSTest {
 
     @BeforeEach
     public void setUp() {
-        //System.setProperty("webdriver.chrome.driver", "D:\\Новая папка\\ASTON\\src\\resources\\chromedriver.exe");
         driver = WebDriverManager.chromedriver().create();
-        //driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -53,8 +50,8 @@ public class NewMTSTest {
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Домашний интернет'")
     public void testEmptyFieldsHomeInternet() {
-        WebElement listServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
-        listServices.click();
+        WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
+        dropDownServices.click();
         WebElement homeInternet = driver.findElement(By.xpath
                 ("//p[@class='select__option'][text()='Домашний интернет']"));
         homeInternet.click();
@@ -74,8 +71,8 @@ public class NewMTSTest {
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Рассрочка'")
     public void testEmptyFieldsInstallment() {
-        WebElement listServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
-        listServices.click();
+        WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
+        dropDownServices.click();
         WebElement installment = driver.findElement(By.xpath("//p[@class='select__option'][text()='Рассрочка']"));
         installment.click();
 
@@ -94,8 +91,8 @@ public class NewMTSTest {
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Задолженность'")
     public void testEmptyFieldsArrears() {
-        WebElement listServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
-        listServices.click();
+        WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
+        dropDownServices.click();
         WebElement arrears = driver.findElement(By.xpath("//p[@class='select__option'][text()='Задолженность']"));
         arrears.click();
 
@@ -115,8 +112,20 @@ public class NewMTSTest {
     @Test
     @DisplayName("Проверить наличие номера телефона в окне оплаты")
     public void testPhoneNumberInPaymentWindow() {
-        preparePaymentForm();
-        WebElement infoField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class = 'pay-description__text']")));
+        WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
+        WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
+        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
+
+        phoneInputField.sendKeys("297777777");
+        sumInputField.sendKeys("10");
+        continueButton.click();
+
+        WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
+        driver.switchTo().frame(iframe);
+
+        WebElement infoField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath
+                ("//span[@class = 'pay-description__text']")));
+
         String textInfoField = infoField.getText();
         String expectedNumber = "375297777777";
 
@@ -126,8 +135,19 @@ public class NewMTSTest {
     @Test
     @DisplayName("Проверить наличие суммы в окне оплаты")
     public void testSumInPaymentWindow() {
-        preparePaymentForm();
-        WebElement sumField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class = 'pay-description__cost']")));
+        WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
+        WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
+        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
+
+        phoneInputField.sendKeys("297777777");
+        sumInputField.sendKeys("10");
+        continueButton.click();
+
+        WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
+        driver.switchTo().frame(iframe);
+
+        WebElement sumField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath
+                ("//div[@class = 'pay-description__cost']")));
         String textSumField = sumField.getText();
         String expectedSum = "10.00";
         WebElement payButton = driver.findElement(By.xpath("//button[@class = 'colored disabled']"));
@@ -141,23 +161,45 @@ public class NewMTSTest {
     @Test
     @DisplayName("Проверка незаполненных полей в окне оплаты")
     public void testBlankFieldsInPaymentWindow() {
-        preparePaymentForm();
-        WebElement inputCardNumber = driver.findElement(By.xpath("//label[text() = 'Номер карты']"));
+        WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
+        WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
+        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
+
+        phoneInputField.sendKeys("297777777");
+        sumInputField.sendKeys("10");
+        continueButton.click();
+
+        WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
+        driver.switchTo().frame(iframe);
+
+        WebElement inputCardNumber = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//label[text() = 'Номер карты']")));
         WebElement inputExpirationDate = driver.findElement(By.xpath("//label[text() = 'Срок действия']"));
         WebElement inputCVC = driver.findElement(By.xpath("//label[text() = 'CVC']"));
         WebElement inputHolderName = driver.findElement(By.xpath("//label[contains(text(), 'Имя держателя')]"));
 
         assertEquals("Номер карты", inputCardNumber.getText(), "Текст 'Номер карты' не совпадает");
-        assertEquals("Срок действия", inputExpirationDate.getText(),"Текст 'Срок действия' не совпадает");
+        assertEquals("Срок действия", inputExpirationDate.getText(), "Текст 'Срок действия' не совпадает");
         assertEquals("CVC", inputCVC.getText(), "Текст 'CVC' не совпадает");
-        assertEquals("Имя держателя (как на карте)",inputHolderName.getText(), "Текст 'Имя держателя' не совпадает");
+        assertEquals("Имя держателя (как на карте)", inputHolderName.getText(), "Текст 'Имя держателя' не совпадает");
     }
 
     @Test
     @DisplayName("Проверка иконок платёжных систем в окне оплаты")
     public void testPaymentSystemIconsInPaymentWindow() {
-        preparePaymentForm();
-        WebElement container = driver.findElement(By.xpath("//div[contains(@class, 'cards-brands__container')]"));
+        WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
+        WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
+        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
+
+        phoneInputField.sendKeys("297777777");
+        sumInputField.sendKeys("10");
+        continueButton.click();
+
+        WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
+        driver.switchTo().frame(iframe);
+
+        WebElement container = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//div[contains(@class, 'cards-brands__container')]")));
         List<WebElement> images = container.findElements(By.tagName("img"));
         assertEquals(5, images.size(), "Количество изображений не равно 5");
     }
@@ -169,19 +211,6 @@ public class NewMTSTest {
         } catch (Exception e) {
             // Если не появилось - игнорируем
         }
-    }
-
-    private void preparePaymentForm() {
-        WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
-        WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
-        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
-
-        phoneInputField.sendKeys("297777777");
-        sumInputField.sendKeys("10");
-        continueButton.click();
-
-        WebElement iframe = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.bepaid-app iframe")));
-        driver.switchTo().frame(iframe);
     }
 
     @AfterEach
