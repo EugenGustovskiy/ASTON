@@ -16,6 +16,9 @@ public class NewMTSTest {
     WebDriver driver;
     WebDriverWait wait;
 
+    private final String phoneNumber = "297777777";
+    private final String paymentSum = "10";
+
     @BeforeAll
     static void setupAll() {
         WebDriverManager.chromedriver().setup();
@@ -116,8 +119,8 @@ public class NewMTSTest {
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
         WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
 
-        phoneInputField.sendKeys("297777777");
-        sumInputField.sendKeys("10");
+        phoneInputField.sendKeys(phoneNumber);
+        sumInputField.sendKeys(paymentSum);
         continueButton.click();
 
         WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
@@ -139,8 +142,8 @@ public class NewMTSTest {
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
         WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
 
-        phoneInputField.sendKeys("297777777");
-        sumInputField.sendKeys("10");
+        phoneInputField.sendKeys(phoneNumber);
+        sumInputField.sendKeys(paymentSum);
         continueButton.click();
 
         WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
@@ -149,13 +152,12 @@ public class NewMTSTest {
         WebElement sumField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath
                 ("//div[@class = 'pay-description__cost']")));
         String textSumField = sumField.getText();
-        String expectedSum = "10.00";
         WebElement payButton = driver.findElement(By.xpath("//button[@class = 'colored disabled']"));
         String textPayButton = payButton.getText();
-        String expectedSumInButton = "10.00";
+        String expectedSum = "10.00";
 
         assertTrue(textSumField.contains(expectedSum), "Текст не содержит сумму " + expectedSum);
-        assertTrue(textPayButton.contains(expectedSumInButton), "Текст не содержит сумму " + expectedSumInButton);
+        assertTrue(textPayButton.contains(expectedSum), "Текст не содержит сумму " + expectedSum);
     }
 
     @Test
@@ -165,8 +167,8 @@ public class NewMTSTest {
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
         WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
 
-        phoneInputField.sendKeys("297777777");
-        sumInputField.sendKeys("10");
+        phoneInputField.sendKeys(phoneNumber);
+        sumInputField.sendKeys(paymentSum);
         continueButton.click();
 
         WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
@@ -191,8 +193,8 @@ public class NewMTSTest {
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
         WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection .button__default"));
 
-        phoneInputField.sendKeys("297777777");
-        sumInputField.sendKeys("10");
+        phoneInputField.sendKeys(phoneNumber);
+        sumInputField.sendKeys(paymentSum);
         continueButton.click();
 
         WebElement iframe = driver.findElement(By.cssSelector("div.bepaid-app iframe"));
@@ -209,7 +211,7 @@ public class NewMTSTest {
             WebElement acceptCookiesButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cookie-agree")));
             acceptCookiesButton.click();
         } catch (Exception e) {
-            // Если не появилось - игнорируем
+            System.out.println("Cookies popup was not found or could not be handled.");
         }
     }
 
