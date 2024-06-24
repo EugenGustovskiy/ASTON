@@ -105,7 +105,7 @@ public class NewMTSTest {
     @DisplayName("Проверить надписи в незаполненных полях 'Задолженность'")
     @Story("Проверка placeholder")
     @Severity(SeverityLevel.MINOR)
-    @Step("Проверить placeholders в назполненных полях для 'Задолженность'")
+    @Step("Проверить placeholders в назаполненных полях для 'Задолженность'")
     public void testEmptyFieldsArrears() {
         WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
         dropDownServices.click();
