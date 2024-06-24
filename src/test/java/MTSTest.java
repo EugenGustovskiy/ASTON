@@ -1,4 +1,7 @@
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -70,7 +73,6 @@ public class MTSTest {
 
         WebElement popupElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//span[text()='10.00 BYN']")));
-
 
 
         assertTrue(popupElement.isDisplayed(), "Всплывающее окно не отобразилось");
