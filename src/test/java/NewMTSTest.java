@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.qameta.allure.*;
 
 import java.time.Duration;
 import java.util.List;
@@ -37,6 +38,9 @@ public class NewMTSTest {
     //Задание 1
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Услуги связи'")
+    @Story("Проверка placeholder")
+    @Severity(SeverityLevel.MINOR)
+    @Step("Проверить placeholders в назполненных полях для 'Услуги связи'")
     public void testEmptyFieldsCommunicationService() {
         WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
@@ -52,6 +56,9 @@ public class NewMTSTest {
 
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Домашний интернет'")
+    @Story("Проверка placeholder")
+    @Severity(SeverityLevel.MINOR)
+    @Step("Проверить placeholders в назполненных полях для 'Домашний интернет'")
     public void testEmptyFieldsHomeInternet() {
         WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
         dropDownServices.click();
@@ -73,6 +80,9 @@ public class NewMTSTest {
 
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Рассрочка'")
+    @Story("Проверка placeholder")
+    @Severity(SeverityLevel.MINOR)
+    @Step("Проверить placeholders в назполненных полях для 'Рассрочка'")
     public void testEmptyFieldsInstallment() {
         WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
         dropDownServices.click();
@@ -93,6 +103,9 @@ public class NewMTSTest {
 
     @Test
     @DisplayName("Проверить надписи в незаполненных полях 'Задолженность'")
+    @Story("Проверка placeholder")
+    @Severity(SeverityLevel.MINOR)
+    @Step("Проверить placeholders в назполненных полях для 'Задолженность'")
     public void testEmptyFieldsArrears() {
         WebElement dropDownServices = driver.findElement(By.xpath("//button[@class = 'select__header']"));
         dropDownServices.click();
@@ -114,6 +127,9 @@ public class NewMTSTest {
     //Задание 2
     @Test
     @DisplayName("Проверить наличие номера телефона в окне оплаты")
+    @Story("Проверить окно оплаты")
+    @Severity(SeverityLevel.CRITICAL)
+    @Step("Проверить номер телефона в окне оплаты")
     public void testPhoneNumberInPaymentWindow() {
         WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
@@ -137,6 +153,9 @@ public class NewMTSTest {
 
     @Test
     @DisplayName("Проверить наличие суммы в окне оплаты")
+    @Story("Проверить окно оплаты")
+    @Severity(SeverityLevel.CRITICAL)
+    @Step("Проверить наличие суммы в окне оплаты")
     public void testSumInPaymentWindow() {
         WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
@@ -161,7 +180,10 @@ public class NewMTSTest {
     }
 
     @Test
-    @DisplayName("Проверка незаполненных полей в окне оплаты")
+    @DisplayName("Проверить незаполненные поля в окне оплаты")
+    @Story("Проверить окно оплаты")
+    @Severity(SeverityLevel.CRITICAL)
+    @Step("Проверить незаполненные поля в окне оплаты")
     public void testBlankFieldsInPaymentWindow() {
         WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
@@ -187,7 +209,10 @@ public class NewMTSTest {
     }
 
     @Test
-    @DisplayName("Проверка иконок платёжных систем в окне оплаты")
+    @DisplayName("Проверить иконки платёжных систем в окне оплаты")
+    @Story("Проверить окно оплаты")
+    @Severity(SeverityLevel.MINOR)
+    @Step("Проверить иконки платёжных систем в окне оплаты")
     public void testPaymentSystemIconsInPaymentWindow() {
         WebElement phoneInputField = driver.findElement(By.xpath("//input[@id = 'connection-phone']"));
         WebElement sumInputField = driver.findElement(By.xpath("//input[@id = 'connection-sum']"));
@@ -206,6 +231,7 @@ public class NewMTSTest {
         assertEquals(5, images.size(), "Количество изображений не равно 5");
     }
 
+    @Step("Обработка cookie")
     private void handleCookiesPopup() {
         try {
             WebElement acceptCookiesButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("cookie-agree")));
