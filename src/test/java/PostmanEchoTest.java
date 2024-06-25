@@ -44,7 +44,6 @@ public class PostmanEchoTest {
     public void postFormDataTest() {
         given()
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
-
                 .formParam("foo1", "bar1")
                 .formParam("foo2", "bar2")
                 .when()
